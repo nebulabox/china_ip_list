@@ -56,11 +56,11 @@ if __name__ == '__main__':
             for record in record_dict_list:
                 if record['country'] == country_to_extract:
                     output_csv.write(
-                        record['net_address'] + '/' + str(int(math.log(int(record['net_size']), 2))) + '\n')
+                        record['net_address'] + '/' + str( 32 - int(math.log(int(record['net_size']), 2))) + '\n')
                     record_extracted_num += 1
         elif country_to_extract.lower() == 'all':
             for record in record_dict_list:
-                output_csv.write(record['net_address'] + '/' + str(int(math.log(int(record['net_size']), 2))) + '\n')
+                output_csv.write(record['net_address'] + '/' + str( 32 - int(math.log(int(record['net_size']), 2))) + '\n')
                 record_extracted_num += 1
         else:
             print '未找到此国家的记录'
