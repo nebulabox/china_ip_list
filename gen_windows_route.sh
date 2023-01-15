@@ -2,7 +2,8 @@
 output="./cn.win.up.ps1"
 rm $output
 GW="192.168.9.1"
-IFC="192.168.9.70"
+# route print : 可以显示所有 interface 的编号
+# IFC="18"
 CNIPFILE="./china_ip_list.txt"
 
 mask2cdr ()
@@ -30,9 +31,9 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
   Start-Process powershell -Verb runAs -ArgumentList $arguments
   Break
 }
-route -P ADD 150.230.40.135 MASK 255.255.255.255 $GW METRIC 2 IF $IFC
-route -P ADD 155.248.177.72   MASK 255.255.255.255 $GW METRIC 2 IF $IFC
-route -P ADD 150.158.164.110   MASK 255.255.255.255 $GW METRIC 2 IF $IFC
+route -P ADD 150.230.40.135 MASK 255.255.255.255 $GW METRIC 2
+route -P ADD 155.248.177.72   MASK 255.255.255.255 $GW METRIC 2
+route -P ADD 150.158.164.110   MASK 255.255.255.255 $GW METRIC 2
 EOF
 for A in `cat $CNIPFILE`; do
 	IPR=${A%/*} # 192.168.2.0 
@@ -41,8 +42,8 @@ for A in `cat $CNIPFILE`; do
    # route ADD destination_network MASK subnet_mask gateway_ip metric_cost
    # route -p 持久保存路由。
    # route -P ADD 192.168.35.0 MASK 255.255.255.0 192.168.0.2
-	echo "route -P ADD $IPR MASK $MSK $GW METRIC 2 IF $IFC"
-	echo "route -P ADD $IPR MASK $MSK $GW METRIC 2 IF $IFC" >> $output
+   echo "route -P ADD $IPR MASK $MSK $GW METRIC 2"
+	echo "route -P ADD $IPR MASK $MSK $GW METRIC 2" >> $output
 done
 
 output="./cn.win.down.ps1"
@@ -62,7 +63,7 @@ for A in `cat $CNIPFILE`; do
 	MSK=$(cdr2mask $CDR)
    # route delete destination_network
    # route delete 192.168.35.0
-	echo "route delete $IPR"
+   echo "route delete $IPR"
 	echo "route delete $IPR" >> $output
 done
 
