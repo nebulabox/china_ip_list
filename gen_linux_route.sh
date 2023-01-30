@@ -1,12 +1,13 @@
 #!/bin/bash
 output="./cn.lin.up.sh"
 rm $output
-GW="192.168.2.1"
+GW="\$1"
 CNIPFILE="./china_ip_list.txt"
 
 cat > $output << EOF
 #!/usr/bin/env zsh
 # some special ips
+sudo ip route add 192.9.138.146/32 via $GW
 sudo ip route add 150.230.40.135/32 via $GW
 sudo ip route add 155.248.177.72/32 via $GW
 sudo ip route add 150.158.164.110/32 via $GW
@@ -23,6 +24,7 @@ output="./cn.lin.down.sh"
 rm $output
 cat > $output << EOF
 #!/usr/bin/env zsh
+sudo ip route delete 192.9.138.146/32
 sudo ip route delete 150.230.40.135/32
 sudo ip route delete 155.248.177.72/32
 sudo ip route delete 150.158.164.110/32 
