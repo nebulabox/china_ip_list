@@ -1,5 +1,8 @@
 #!/bin/bash
-# ip -6 route add 2606:4700:4700::/48 via fe80::1 dev eth0
+# sudo ip -6 r get default
+# sudo ip -6 route add 2606:4700:4700::/48 via fe80::aa5e:45ff:fe99:b6c0 dev ens32
+# sudo mtr 2606:4700:4700::1111
+# sudo ip -6 r delete 2606:4700:4700::/48
 output="./cn.lin.up.sh"
 rm $output
 GW="\$1"
@@ -10,7 +13,9 @@ CN6IPFILE="./china_cidr6.txt"
 
 cat > $output << EOF
 #!/usr/bin/env zsh
-if [ "$#" -ne 3 ]; then
+if [ "\$#" -le 3 ]; then
+    echo "GET the ipv6gw and devname with: "
+    echo "     sudo ip -6 r get default "
     echo "gen_linux_route.sh ipv4gw ipv6gw devname"
     exit 1
 fi
