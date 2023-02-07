@@ -1,6 +1,4 @@
 #!/usr/bin/env zsh
-# sudo ip route delete 2603:c024:c004:5900::/64
-# sudo ip route delete 2603:c021:800c:c9ee::/64
 sudo ip route delete 192.9.138.146/32
 sudo ip route delete 150.230.40.135/32
 sudo ip route delete 155.248.177.72/32
