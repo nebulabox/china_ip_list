@@ -1,7 +1,4 @@
 #!/usr/bin/env zsh
-# route_net_gateway="192.168.2.1"
-# net_gateway_ipv6="fe80::9a00:74ff:feab:b353"
-# some special ips
 # mars
 sudo ip route add 150.230.40.135/32 via $route_net_gateway 
 # ac

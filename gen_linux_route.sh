@@ -3,6 +3,8 @@
 # sudo ip -6 route add 2606:4700:4700::/48 via fe80::aa5e:45ff:fe99:b6c0 dev ens32
 # sudo mtr 2606:4700:4700::1111
 # sudo ip -6 r delete 2606:4700:4700::/48
+# OpenVPN ->: route_net_gateway="192.168.2.1"
+# OpenVPN ->: net_gateway_ipv6="fe80::9a00:74ff:feab:b353"
 output="./cn.lin.up.sh"
 rm $output
 GW="\$route_net_gateway"
@@ -12,9 +14,6 @@ CNIPFILE="./china_cidr4.txt"
 
 cat > $output << EOF
 #!/usr/bin/env zsh
-# route_net_gateway="192.168.2.1"
-# net_gateway_ipv6="fe80::9a00:74ff:feab:b353"
-# some special ips
 # mars
 sudo ip route add 150.230.40.135/32 via $GW 
 # ac
